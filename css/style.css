@@ -1,3 +1,10 @@
+/* ==========================
+   MISSÃO EVANGELÍSTICA ATOS 1.8
+   ESTILO GLOBAL MISSIONÁRIO
+========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
 *{
     margin:0;
     padding:0;
@@ -5,167 +12,261 @@
     scroll-behavior:smooth;
 }
 
-body{
-
-    background:#050505;
-    color:#fff;
-    font-family:Georgia, serif;
-
+:root{
+    --vermelho:#e10600;
+    --amarelo:#ffd400;
+    --azul:#00bfff;
+    --preto:#050505;
+    --cinza:#121212;
+    --branco:#ffffff;
 }
 
-.hero{
+body{
+    background:
+    radial-gradient(circle at center,
+    rgba(0,100,255,.12),
+    transparent 50%),
+    #030303;
 
-    height:100vh;
+    color:#fff;
+    font-family:'Montserrat',sans-serif;
+    overflow-x:hidden;
+}
+
+/* ==========================
+   HERO
+========================== */
+
+.hero{
+    min-height:100vh;
+    padding:80px 20px;
 
     background:
     linear-gradient(
-    rgba(0,0,0,.75),
-    rgba(0,0,0,.90)),
-    url('../img/hero.jpg');
+    rgba(0,0,0,.70),
+    rgba(0,0,0,.92)),
+    url('../img/hero.png');
 
     background-size:cover;
     background-position:center;
+    background-attachment:scroll;
 
     display:flex;
     justify-content:center;
     align-items:center;
-
     text-align:center;
+    position:relative;
+}
 
+.hero::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(circle,
+    rgba(0,191,255,.15),
+    transparent 60%);
+
+    animation:pulse 6s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        transform:scale(1.1);
+        opacity:.6;
+    }
 }
 
 .hero-content{
-    max-width:900px;
+    position:relative;
+    z-index:2;
+    max-width:1000px;
+    padding:20px;
 }
 
 .subtitle{
+    display:inline-block;
 
-    color:#c8a96b;
+    color:var(--amarelo);
 
     text-transform:uppercase;
 
-    letter-spacing:4px;
+    letter-spacing:6px;
+
+    font-weight:700;
+
+    margin-bottom:20px;
 }
 
 .hero h1{
+    font-family:'Oswald',sans-serif;
 
     font-size:6rem;
 
-    margin:20px 0;
+    line-height:1;
+
+    text-transform:uppercase;
+
+    color:var(--vermelho);
+
+    text-shadow:
+    0 0 10px rgba(225,6,0,.6),
+    0 0 25px rgba(225,6,0,.4);
+
+    margin-bottom:30px;
 }
 
 .hero p{
-
     font-size:1.3rem;
-
     line-height:2;
+    max-width:800px;
+    margin:auto;
 }
 
 .btn{
-
     display:inline-block;
 
     margin-top:40px;
 
-    padding:18px 40px;
+    padding:18px 45px;
 
-    background:#c8a96b;
+    background:var(--amarelo);
 
     color:#000;
 
     text-decoration:none;
 
-    border-radius:50px;
+    text-transform:uppercase;
 
-    font-weight:bold;
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    border-radius:60px;
+
+    transition:.4s;
 }
 
+.btn:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 0 20px rgba(255,212,0,.6);
+}
+
+/* ==========================
+   MENU
+========================== */
+
 nav{
+    position:sticky;
+    top:0;
+    z-index:999;
 
-    background:#111;
+    background:rgba(0,0,0,.95);
 
-    padding:20px;
+    backdrop-filter:blur(10px);
+
+    border-top:1px solid rgba(255,212,0,.2);
+    border-bottom:1px solid rgba(255,212,0,.2);
 
     display:flex;
-
     justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
 
-    gap:40px;
+    gap:20px;
 
-    position:sticky;
-
-    top:0;
-
-    z-index:999;
+    padding:15px;
 }
 
 nav a{
-
-    color:white;
-
+    color:#fff;
     text-decoration:none;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    transition:.3s;
+    font-size:.9rem;
 }
 
 nav a:hover{
-    color:#c8a96b;
+    color:var(--amarelo);
 }
 
-.intro{
+/* ==========================
+   TÍTULOS
+========================== */
 
-    max-width:1000px;
-
-    margin:auto;
-
+.titulo,
+.intro h2,
+.galeria h2{
     text-align:center;
 
-    padding:120px 20px;
+    font-family:'Oswald',sans-serif;
+
+    font-size:4rem;
+
+    text-transform:uppercase;
+
+    color:var(--vermelho);
+
+    letter-spacing:2px;
+
+    margin-bottom:50px;
+
+    text-shadow:
+    0 0 15px rgba(225,6,0,.4);
 }
 
-.intro h2{
+/* ==========================
+   INTRODUÇÃO
+========================== */
 
-    color:#c8a96b;
-
-    font-size:3rem;
-
-    margin-bottom:30px;
+.intro{
+    max-width:1100px;
+    margin:auto;
+    text-align:center;
+    padding:120px 30px;
 }
 
 .intro p{
-
+    font-size:1.1rem;
     line-height:2;
+    color:#ddd;
 }
 
-.titulo{
-
-    text-align:center;
-
-    font-size:3rem;
-
-    color:#c8a96b;
-
-    margin-bottom:80px;
-}
+/* ==========================
+   SEÇÃO VIAGENS
+========================== */
 
 #viagens{
-
-    padding:100px 8%;
+    padding:100px 7%;
 }
 
 .viagem{
-
     display:flex;
-
     align-items:center;
-
     gap:50px;
 
-    margin-bottom:120px;
+    margin-bottom:100px;
 
-    background:#111;
+    padding:35px;
 
-    padding:30px;
+    border-radius:25px;
 
-    border-radius:20px;
+    background:
+    linear-gradient(
+    145deg,
+    #111,
+    #050505);
+
+    border:1px solid rgba(255,212,0,.15);
+
+    box-shadow:
+    0 0 40px rgba(0,0,0,.5);
 }
 
 .reverse{
@@ -173,181 +274,302 @@ nav a:hover{
 }
 
 .viagem img{
-
-    width:500px;
-
+    width:100%;
+    max-width:500px;
     border-radius:20px;
+
+    border:3px solid rgba(255,212,0,.2);
+
+    transition:.4s;
+}
+
+.viagem img:hover{
+    transform:scale(1.03);
 }
 
 .texto{
-
     flex:1;
 }
 
 .texto h3{
+    font-family:'Oswald',sans-serif;
 
-    color:#c8a96b;
+    color:var(--amarelo);
+
+    text-transform:uppercase;
+
+    font-size:2.4rem;
 
     margin-bottom:20px;
-
-    font-size:2rem;
 }
 
 .texto p{
-
     line-height:2;
-
-    margin-bottom:20px;
+    color:#d7d7d7;
 }
 
+/* ==========================
+   VIDEO
+========================== */
+
 video{
-
+    display:block;
     width:100%;
+    max-width:100%;
+    margin-top:25px;
 
+    border-radius:20px;
+
+    border:2px solid rgba(0,191,255,.2);
+}
+
+/* ==========================
+   CARROSSEL
+========================== */
+
+.carousel{
+    margin-top:25px;
+    overflow:hidden;
     border-radius:15px;
 }
 
+.carousel-track{
+    display:flex;
+    gap:15px;
+    width:max-content;
+    animation:slide 35s linear infinite;
+}
+
+.carousel-track img{
+    width:280px;
+    height:180px;
+    object-fit:cover;
+
+    border-radius:15px;
+
+    border:2px solid rgba(255,212,0,.15);
+
+    transition:.4s;
+}
+
+.carousel-track img:hover{
+    transform:scale(1.06);
+
+    border-color:var(--amarelo);
+}
+
+@keyframes slide{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* ==========================
+   ESTATÍSTICAS
+========================== */
+
 .estatisticas{
-
-    background:#111;
-
-    padding:100px 20px;
+    background:
+    linear-gradient(
+    180deg,
+    #080808,
+    #111);
 
     display:grid;
 
     grid-template-columns:repeat(4,1fr);
 
+    padding:100px 20px;
+
     text-align:center;
+}
+
+.numero{
+    padding:20px;
 }
 
 .numero h3{
+    font-family:'Oswald',sans-serif;
 
-    color:#c8a96b;
+    color:var(--amarelo);
 
-    font-size:3rem;
+    font-size:4rem;
 }
+
+.numero p{
+    margin-top:10px;
+    color:#ccc;
+}
+
+/* ==========================
+   GALERIA
+========================== */
 
 .galeria{
-
-    padding:120px 8%;
-}
-
-.galeria h2{
-
-    text-align:center;
-
-    color:#c8a96b;
-
-    margin-bottom:60px;
-
-    font-size:3rem;
+    padding:120px 7%;
 }
 
 .grid{
-
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
+    repeat(auto-fit,minmax(300px,1fr));
 
-    gap:20px;
+    gap:25px;
 }
 
 .grid img{
-
     width:100%;
-
     height:280px;
 
     object-fit:cover;
 
     border-radius:20px;
 
-    cursor:pointer;
-
     transition:.4s;
+
+    border:2px solid rgba(255,255,255,.08);
 }
 
 .grid img:hover{
+    transform:scale(1.04);
 
-    transform:scale(1.03);
+    border-color:var(--amarelo);
+
+    box-shadow:
+    0 0 25px rgba(255,212,0,.2);
 }
 
+/* ==========================
+   VERSÍCULO
+========================== */
+
 .versiculo{
-
-    padding:120px 20px;
-
-    text-align:center;
+    padding:120px 30px;
 }
 
 blockquote{
-
-    max-width:900px;
+    max-width:1000px;
 
     margin:auto;
+
+    background:
+    linear-gradient(
+    145deg,
+    #111,
+    #050505);
+
+    border-left:5px solid var(--amarelo);
+
+    border-radius:20px;
+
+    padding:50px;
 
     font-size:2rem;
 
     line-height:2;
 
-    border-left:5px solid #c8a96b;
-
-    padding:40px;
-
-    background:#111;
+    text-align:center;
 }
 
 blockquote span{
-
     display:block;
 
     margin-top:20px;
 
-    color:#c8a96b;
+    color:var(--amarelo);
+
+    font-size:1.1rem;
+
+    text-transform:uppercase;
 }
 
-footer{
+/* ==========================
+   FOOTER
+========================== */
 
+footer{
     background:#000;
 
     text-align:center;
 
-    padding:60px 20px;
+    padding:80px 20px;
+
+    border-top:1px solid rgba(255,212,0,.15);
 }
 
 footer h3{
+    font-family:'Oswald',sans-serif;
 
-    color:#c8a96b;
+    color:var(--vermelho);
 
-    margin-bottom:20px;
+    font-size:2rem;
+
+    text-transform:uppercase;
+
+    margin-bottom:15px;
 }
 
-#topBtn{
+footer p{
+    color:#bbb;
+    letter-spacing:2px;
+}
 
+/* ==========================
+   BOTÃO TOPO
+========================== */
+
+#topBtn{
     position:fixed;
 
-    right:20px;
-    bottom:20px;
+    right:25px;
+    bottom:25px;
 
-    width:55px;
-    height:55px;
+    width:60px;
+    height:60px;
 
     border:none;
 
     border-radius:50%;
 
-    background:#c8a96b;
+    background:var(--amarelo);
 
     color:#000;
+
+    font-size:22px;
+
+    font-weight:bold;
 
     cursor:pointer;
 
     display:none;
+
+    transition:.3s;
 }
 
-@media(max-width:900px){
+#topBtn:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 0 20px rgba(255,212,0,.5);
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+@media(max-width:1024px){
 
     .hero h1{
+        font-size:4rem;
+    }
+
+    .titulo,
+    .intro h2,
+    .galeria h2{
         font-size:3rem;
     }
 
@@ -356,81 +578,165 @@ footer h3{
         flex-direction:column;
     }
 
-    .viagem img{
-        width:100%;
-    }
-
-    .estatisticas{
-        grid-template-columns:1fr 1fr;
+    .viagem{
         gap:30px;
     }
 
-    nav{
-        flex-wrap:wrap;
+    .viagem img{
+        width:100%;
+        max-width:700px;
+    }
+
+    .estatisticas{
+        grid-template-columns:repeat(2,1fr);
         gap:20px;
     }
 
 }
 
-
 /* ==========================
-   CARROSSEL DE FOTOS
+   CELULAR
 ========================== */
 
-.carousel{
+@media(max-width:768px){
 
-    margin-top:25px;
-
-    overflow:hidden;
-
-    width:100%;
-
-    border-radius:15px;
-
-}
-
-.carousel-track{
-
-    display:flex;
-
-    gap:15px;
-
-    width:max-content;
-
-    animation:slide 25s linear infinite;
-
-}
-
-.carousel-track img{
-
-    width:280px;
-
-    height:180px;
-
-    object-fit:cover;
-
-    border-radius:15px;
-
-    border:2px solid rgba(200,169,107,.20);
-
-    transition:.4s;
-
-}
-
-.carousel-track img:hover{
-
-    transform:scale(1.05);
-
-}
-
-@keyframes slide{
-
-    from{
-        transform:translateX(0);
+    .hero{
+        padding:100px 20px;
     }
 
-    to{
-        transform:translateX(-50%);
+    .subtitle{
+        letter-spacing:3px;
+        font-size:.85rem;
+    }
+
+    .hero h1{
+        font-size:3rem;
+        line-height:1.1;
+    }
+
+    .hero p{
+        font-size:1rem;
+        line-height:1.8;
+    }
+
+    .btn{
+        padding:15px 30px;
+        font-size:.9rem;
+    }
+
+    .titulo,
+    .intro h2,
+    .galeria h2{
+        font-size:2.3rem;
+    }
+
+    .intro{
+        padding:80px 20px;
+    }
+
+    #viagens{
+        padding:60px 15px;
+    }
+
+    .viagem{
+        padding:20px;
+        margin-bottom:60px;
+    }
+
+    .texto h3{
+        font-size:1.8rem;
+    }
+
+    .texto p{
+        font-size:.95rem;
+    }
+
+    .carousel-track img{
+        width:220px;
+        height:140px;
+    }
+
+    .estatisticas{
+        grid-template-columns:1fr 1fr;
+        padding:70px 20px;
+    }
+
+    .numero h3{
+        font-size:2.8rem;
+    }
+
+    .galeria{
+        padding:80px 15px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .grid img{
+        height:240px;
+    }
+
+    blockquote{
+        font-size:1.4rem;
+        padding:30px 20px;
+        line-height:1.8;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .hero h1{
+        font-size:2.2rem;
+    }
+
+    .hero p{
+        font-size:.95rem;
+    }
+
+    .titulo,
+    .intro h2,
+    .galeria h2{
+        font-size:1.9rem;
+    }
+
+    .texto h3{
+        font-size:1.5rem;
+    }
+
+    .carousel-track img{
+        width:180px;
+        height:120px;
+    }
+
+    .estatisticas{
+        grid-template-columns:1fr;
+    }
+
+    .numero h3{
+        font-size:2rem;
+    }
+
+    blockquote{
+        font-size:1.1rem;
+        padding:25px 15px;
+    }
+
+    footer h3{
+        font-size:1.5rem;
+    }
+
+    footer p{
+        font-size:.9rem;
+    }
+
+    #topBtn{
+        width:50px;
+        height:50px;
+        font-size:18px;
+        right:15px;
+        bottom:15px;
     }
 
 }
