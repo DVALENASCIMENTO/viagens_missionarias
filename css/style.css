@@ -337,7 +337,11 @@ video{
     display:flex;
     gap:15px;
     width:max-content;
-    animation:slide 35s linear infinite;
+    animation:slide 80s linear infinite;
+}
+
+.carousel-track:hover{
+    animation-play-state: paused;
 }
 
 .carousel-track img{
