@@ -1,109 +1,198 @@
-/* ==========================
+
+/* =========================================================
    MISSÃO EVANGELÍSTICA ATOS 1.8
-   ESTILO GLOBAL MISSIONÁRIO
-========================== */
+   VIAGENS MISSIONÁRIAS
+   CSS RESPONSIVO COMPLETO
+   ========================================================= */
+
+
+/* =========================================================
+   FONTES
+   ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    scroll-behavior:smooth;
 }
 
-:root{
-    --vermelho:#e10600;
-    --amarelo:#ffd400;
-    --azul:#00bfff;
-    --preto:#050505;
-    --cinza:#121212;
-    --branco:#ffffff;
+html{
+    scroll-behavior:smooth;
+    scroll-padding-top:80px;
 }
 
 body{
+    width:100%;
+    min-height:100vh;
+
     background:
-    radial-gradient(circle at center,
-    rgba(0,100,255,.12),
-    transparent 50%),
-    #030303;
+        radial-gradient(
+            circle at center,
+            rgba(0,100,255,.12),
+            transparent 50%
+        ),
+        #030303;
 
     color:#fff;
+
     font-family:'Montserrat',sans-serif;
+
     overflow-x:hidden;
+
+    line-height:1.6;
 }
 
-/* ==========================
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+:root{
+
+    --vermelho:#e10600;
+    --amarelo:#ffd400;
+    --azul:#00bfff;
+
+    --preto:#050505;
+    --cinza:#121212;
+    --cinza-claro:#d7d7d7;
+
+    --branco:#ffffff;
+
+    --container:1400px;
+
+    --raio:20px;
+
+    --sombra:
+        0 15px 40px rgba(0,0,0,.45);
+}
+
+
+/* =========================================================
+   IMAGENS E MÍDIA
+   ========================================================= */
+
+img,
+video{
+    max-width:100%;
+}
+
+img{
+    display:block;
+}
+
+
+/* =========================================================
    HERO
-========================== */
+   ========================================================= */
 
 .hero{
-    min-height:100vh;
-    padding:80px 20px;
+
+    width:100%;
+    min-height:clamp(520px, 90vh, 850px);
+
+    padding:
+        clamp(80px, 10vw, 140px)
+        20px;
 
     background:
-    linear-gradient(
-    rgba(0,0,0,.70),
-    rgba(0,0,0,.92)),
-    url('../img/hero.png');
+        linear-gradient(
+            rgba(0,0,0,.68),
+            rgba(0,0,0,.93)
+        ),
+        url('../img/hero.png');
 
     background-size:cover;
     background-position:center;
-    background-attachment:scroll;
 
     display:flex;
     justify-content:center;
     align-items:center;
+
     text-align:center;
+
     position:relative;
+
+    overflow:hidden;
 }
 
+
 .hero::before{
+
     content:"";
 
     position:absolute;
+
     inset:0;
 
     background:
-    radial-gradient(circle,
-    rgba(0,191,255,.15),
-    transparent 60%);
+        radial-gradient(
+            circle,
+            rgba(0,191,255,.15),
+            transparent 60%
+        );
 
     animation:pulse 6s infinite;
 }
 
+
 @keyframes pulse{
+
     50%{
         transform:scale(1.1);
         opacity:.6;
     }
+
 }
 
+
 .hero-content{
+
     position:relative;
+
     z-index:2;
+
+    width:100%;
+
     max-width:1000px;
+
     padding:20px;
 }
 
+
 .subtitle{
+
     display:inline-block;
 
     color:var(--amarelo);
 
     text-transform:uppercase;
 
-    letter-spacing:6px;
+    letter-spacing:
+        clamp(2px, .5vw, 6px);
 
     font-weight:700;
+
+    font-size:
+        clamp(.75rem, 1.5vw, 1rem);
 
     margin-bottom:20px;
 }
 
+
 .hero h1{
+
     font-family:'Oswald',sans-serif;
 
-    font-size:6rem;
+    font-size:
+        clamp(2.5rem, 7vw, 6rem);
 
     line-height:1;
 
@@ -112,25 +201,43 @@ body{
     color:var(--vermelho);
 
     text-shadow:
-    0 0 10px rgba(225,6,0,.6),
-    0 0 25px rgba(225,6,0,.4);
+        0 0 10px rgba(225,6,0,.6),
+        0 0 25px rgba(225,6,0,.4);
 
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
+
 
 .hero p{
-    font-size:1.3rem;
-    line-height:2;
+
+    width:100%;
+
     max-width:800px;
+
     margin:auto;
+
+    font-size:
+        clamp(.95rem, 2vw, 1.3rem);
+
+    line-height:1.8;
+
+    color:#eee;
 }
 
+
+/* =========================================================
+   BOTÃO PRINCIPAL
+   ========================================================= */
+
 .btn{
+
     display:inline-block;
 
-    margin-top:40px;
+    margin-top:35px;
 
-    padding:18px 45px;
+    padding:
+        15px
+        clamp(25px, 5vw, 45px);
 
     background:var(--amarelo);
 
@@ -142,398 +249,702 @@ body{
 
     font-weight:800;
 
-    letter-spacing:2px;
+    letter-spacing:1px;
+
+    font-size:.9rem;
 
     border-radius:60px;
 
-    transition:.4s;
+    transition:.3s;
+
 }
+
 
 .btn:hover{
-    transform:translateY(-5px);
+
+    transform:translateY(-4px);
 
     box-shadow:
-    0 0 20px rgba(255,212,0,.6);
+        0 0 20px rgba(255,212,0,.6);
 }
 
-/* ==========================
+
+/* =========================================================
    MENU
-========================== */
+   ========================================================= */
 
 nav{
+
     position:sticky;
+
     top:0;
+
     z-index:999;
 
-    background:rgba(0,0,0,.95);
+    width:100%;
+
+    background:rgba(0,0,0,.96);
 
     backdrop-filter:blur(10px);
 
-    border-top:1px solid rgba(255,212,0,.2);
-    border-bottom:1px solid rgba(255,212,0,.2);
+    border-top:
+        1px solid rgba(255,212,0,.2);
+
+    border-bottom:
+        1px solid rgba(255,212,0,.2);
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     flex-wrap:wrap;
 
-    gap:20px;
+    gap:8px 20px;
 
-    padding:15px;
+    padding:
+        12px 15px;
 }
+
 
 nav a{
+
     color:#fff;
+
     text-decoration:none;
+
     font-weight:600;
+
     text-transform:uppercase;
-    letter-spacing:1px;
+
+    letter-spacing:.5px;
+
     transition:.3s;
-    font-size:.9rem;
+
+    font-size:.85rem;
+
+    white-space:nowrap;
 }
 
+
 nav a:hover{
+
     color:var(--amarelo);
 }
 
-/* ==========================
+
+/* =========================================================
    TÍTULOS
-========================== */
+   ========================================================= */
 
 .titulo,
 .intro h2,
 .galeria h2{
+
     text-align:center;
 
     font-family:'Oswald',sans-serif;
 
-    font-size:4rem;
+    font-size:
+        clamp(2rem, 5vw, 4rem);
+
+    line-height:1.1;
 
     text-transform:uppercase;
 
     color:var(--vermelho);
 
-    letter-spacing:2px;
+    letter-spacing:1px;
 
-    margin-bottom:50px;
+    margin-bottom:
+        clamp(30px, 5vw, 50px);
 
     text-shadow:
-    0 0 15px rgba(225,6,0,.4);
+        0 0 15px rgba(225,6,0,.4);
 }
 
-/* ==========================
+
+/* =========================================================
    INTRODUÇÃO
-========================== */
+   ========================================================= */
 
 .intro{
+
+    width:100%;
+
     max-width:1100px;
+
     margin:auto;
+
     text-align:center;
-    padding:120px 30px;
+
+    padding:
+        clamp(70px, 10vw, 120px)
+        20px;
 }
 
+
 .intro p{
-    font-size:1.1rem;
-    line-height:2;
+
+    max-width:900px;
+
+    margin:auto;
+
+    font-size:
+        clamp(.95rem, 1.5vw, 1.1rem);
+
+    line-height:1.9;
+
     color:#ddd;
 }
 
-/* ==========================
+
+/* =========================================================
    SEÇÃO VIAGENS
-========================== */
+   ========================================================= */
 
 #viagens{
-    padding:100px 7%;
+
+    width:100%;
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:
+        clamp(60px, 8vw, 100px)
+        clamp(15px, 5vw, 7%);
 }
+
+
+/* =========================================================
+   CARD DA VIAGEM
+   ========================================================= */
 
 .viagem{
+
+    width:100%;
+
     display:flex;
+
     align-items:center;
-    gap:50px;
 
-    margin-bottom:100px;
+    gap:
+        clamp(25px, 4vw, 50px);
 
-    padding:35px;
+    margin-bottom:
+        clamp(50px, 8vw, 100px);
 
-    border-radius:25px;
+    padding:
+        clamp(20px, 4vw, 35px);
+
+    border-radius:var(--raio);
 
     background:
-    linear-gradient(
-    145deg,
-    #111,
-    #050505);
+        linear-gradient(
+            145deg,
+            #111,
+            #050505
+        );
 
-    border:1px solid rgba(255,212,0,.15);
+    border:
+        1px solid rgba(255,212,0,.15);
 
     box-shadow:
-    0 0 40px rgba(0,0,0,.5);
+        0 0 40px rgba(0,0,0,.5);
+
+    overflow:hidden;
 }
 
+
 .reverse{
+
     flex-direction:row-reverse;
 }
 
-.viagem img{
+
+/* =========================================================
+   IMAGEM PRINCIPAL DA VIAGEM
+   ========================================================= */
+
+.viagem > img{
+
+    display:block;
+
+    flex:0 1 500px;
+
     width:100%;
+
     max-width:500px;
+
+    height:auto;
+
+    aspect-ratio:4 / 3;
+
+    object-fit:cover;
+
     border-radius:20px;
 
-    border:3px solid rgba(255,212,0,.2);
+    border:
+        3px solid rgba(255,212,0,.2);
 
     transition:.4s;
 }
 
-.viagem img:hover{
-    transform:scale(1.03);
+
+.viagem > img:hover{
+
+    transform:scale(1.02);
 }
+
+
+/* =========================================================
+   CONTEÚDO DA VIAGEM
+   ========================================================= */
 
 .texto{
+
     flex:1;
+
+    min-width:0;
 }
 
+
 .texto h3{
+
     font-family:'Oswald',sans-serif;
 
     color:var(--amarelo);
 
     text-transform:uppercase;
 
-    font-size:2.4rem;
+    font-size:
+        clamp(1.5rem, 3vw, 2.4rem);
+
+    line-height:1.15;
 
     margin-bottom:20px;
 }
 
+
 .texto p{
-    line-height:2;
+
+    line-height:1.9;
+
     color:#d7d7d7;
+
+    font-size:
+        clamp(.9rem, 1.5vw, 1rem);
 }
 
-/* ==========================
-   VIDEO
-========================== */
 
-video{
+/* =========================================================
+   VÍDEOS
+   ========================================================= */
+
+.video-missionario{
+
     display:block;
+
     width:100%;
-    max-width:100%;
-    margin-top:25px;
 
-    border-radius:20px;
+    max-width:560px;
 
-    border:2px solid rgba(0,191,255,.2);
+    aspect-ratio:16 / 9;
+
+    height:auto;
+
+    margin:
+        25px auto 0;
+
+    object-fit:contain;
+
+    background:#000;
+
+    border-radius:16px;
+
+    border:
+        2px solid rgba(0,191,255,.2);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.45);
 }
 
-/* ==========================
-   CARROSSEL
-========================== */
 
-.carousel{
-    margin-top:25px;
-    overflow:hidden;
-    border-radius:15px;
+
+/* =========================================================
+   CARROSSEL DE FOTOS
+   ========================================================= */
+
+.carousel {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 25px;
+    border-radius: 15px;
 }
 
-.carousel-track{
-    display:flex;
-    gap:15px;
-    width:max-content;
-    animation:slide 80s linear infinite;
+.carousel-track {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    width: max-content;
+
+    /* IMPORTANTE:
+       o movimento agora será feito pelo JavaScript */
+    transform: translateX(0);
+
+    will-change: transform;
 }
 
-.carousel-track:hover{
-    animation-play-state: paused;
+.carousel-track img {
+    flex: 0 0 auto;
+
+    width: 280px;
+    height: 180px;
+
+    object-fit: cover;
+
+    border-radius: 15px;
+
+    border: 2px solid rgba(255,212,0,.15);
+
+    cursor: pointer;
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease;
 }
 
-.carousel-track img{
-    width:280px;
-    height:180px;
-    object-fit:cover;
-
-    border-radius:15px;
-
-    border:2px solid rgba(255,212,0,.15);
-
-    transition:.4s;
+.carousel-track img:hover {
+    transform: scale(1.04);
+    border-color: var(--amarelo);
 }
 
-.carousel-track img:hover{
-    transform:scale(1.06);
 
-    border-color:var(--amarelo);
-}
+/* =========================================================
+   TABLET
+   ========================================================= */
 
-@keyframes slide{
-    from{
-        transform:translateX(0);
+@media (max-width:1024px) {
+
+    .carousel-track {
+        gap: 12px;
     }
-    to{
-        transform:translateX(-50%);
+
+    .carousel-track img {
+        width: 240px;
+        height: 155px;
     }
+
 }
 
-/* ==========================
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width:768px) {
+
+    .carousel {
+        margin-top: 20px;
+        border-radius: 12px;
+    }
+
+    .carousel-track {
+        gap: 10px;
+    }
+
+    .carousel-track img {
+        width: 190px;
+        height: 125px;
+        border-radius: 12px;
+        border-width: 1px;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR PEQUENO
+   ========================================================= */
+
+@media (max-width:480px) {
+
+    .carousel-track {
+        gap: 8px;
+    }
+
+    .carousel-track img {
+        width: 165px;
+        height: 110px;
+        border-radius: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR MUITO PEQUENO
+   ========================================================= */
+
+@media (max-width:360px) {
+
+    .carousel-track img {
+        width: 145px;
+        height: 95px;
+    }
+
+}
+
+
+
+/* =========================================================
    ESTATÍSTICAS
-========================== */
+   ========================================================= */
 
 .estatisticas{
-    background:
-    linear-gradient(
-    180deg,
-    #080808,
-    #111);
+
+    width:100%;
 
     display:grid;
 
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:
+        repeat(4,1fr);
 
-    padding:100px 20px;
+    gap:20px;
+
+    padding:
+        clamp(60px, 8vw, 100px)
+        20px;
 
     text-align:center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #080808,
+            #111
+        );
 }
 
+
 .numero{
+
     padding:20px;
 }
 
+
 .numero h3{
+
     font-family:'Oswald',sans-serif;
 
     color:var(--amarelo);
 
-    font-size:4rem;
+    font-size:
+        clamp(2.3rem, 5vw, 4rem);
+
+    line-height:1;
 }
+
 
 .numero p{
+
     margin-top:10px;
+
     color:#ccc;
+
+    font-size:.95rem;
 }
 
-/* ==========================
+
+/* =========================================================
    GALERIA
-========================== */
+   ========================================================= */
 
 .galeria{
-    padding:120px 7%;
+
+    width:100%;
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:
+        clamp(70px, 10vw, 120px)
+        clamp(15px, 5vw, 7%);
 }
 
+
 .grid{
+
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(300px,1fr));
+        repeat(
+            auto-fit,
+            minmax(250px,1fr)
+        );
 
-    gap:25px;
+    gap:20px;
 }
 
+
 .grid img{
+
     width:100%;
+
     height:280px;
 
     object-fit:cover;
 
     border-radius:20px;
 
-    transition:.4s;
+    transition:.3s;
 
-    border:2px solid rgba(255,255,255,.08);
+    border:
+        2px solid rgba(255,255,255,.08);
+
+    cursor:pointer;
 }
 
+
 .grid img:hover{
-    transform:scale(1.04);
+
+    transform:scale(1.02);
 
     border-color:var(--amarelo);
 
     box-shadow:
-    0 0 25px rgba(255,212,0,.2);
+        0 0 25px rgba(255,212,0,.2);
 }
 
-/* ==========================
+
+/* =========================================================
    VERSÍCULO
-========================== */
+   ========================================================= */
 
 .versiculo{
-    padding:120px 30px;
+
+    width:100%;
+
+    padding:
+        clamp(70px, 10vw, 120px)
+        20px;
 }
 
+
 blockquote{
+
+    width:100%;
+
     max-width:1000px;
 
     margin:auto;
 
     background:
-    linear-gradient(
-    145deg,
-    #111,
-    #050505);
+        linear-gradient(
+            145deg,
+            #111,
+            #050505
+        );
 
-    border-left:5px solid var(--amarelo);
+    border-left:
+        5px solid var(--amarelo);
 
     border-radius:20px;
 
-    padding:50px;
+    padding:
+        clamp(30px, 5vw, 50px);
 
-    font-size:2rem;
+    font-size:
+        clamp(1.2rem, 3vw, 2rem);
 
-    line-height:2;
+    line-height:1.8;
 
     text-align:center;
 }
 
+
 blockquote span{
+
     display:block;
 
     margin-top:20px;
 
     color:var(--amarelo);
 
-    font-size:1.1rem;
+    font-size:.95rem;
 
     text-transform:uppercase;
 }
 
-/* ==========================
+
+/* =========================================================
    FOOTER
-========================== */
+   ========================================================= */
 
 footer{
+
+    width:100%;
+
     background:#000;
 
     text-align:center;
 
-    padding:80px 20px;
+    padding:
+        70px
+        20px;
 
-    border-top:1px solid rgba(255,212,0,.15);
+    border-top:
+        1px solid rgba(255,212,0,.15);
 }
 
+
 footer h3{
+
     font-family:'Oswald',sans-serif;
 
     color:var(--vermelho);
 
-    font-size:2rem;
+    font-size:
+        clamp(1.5rem, 4vw, 2rem);
 
     text-transform:uppercase;
 
     margin-bottom:15px;
 }
 
+
 footer p{
+
     color:#bbb;
-    letter-spacing:2px;
+
+    letter-spacing:
+        clamp(.5px, .3vw, 2px);
+
+    font-size:.9rem;
 }
 
-/* ==========================
-   BOTÃO TOPO
-========================== */
+
+/* =========================================================
+   BOTÃO VOLTAR AO TOPO
+   ========================================================= */
 
 #topBtn{
+
     position:fixed;
 
-    right:25px;
-    bottom:25px;
+    right:20px;
 
-    width:60px;
-    height:60px;
+    bottom:20px;
+
+    width:55px;
+
+    height:55px;
 
     border:none;
 
@@ -551,196 +962,768 @@ footer p{
 
     display:none;
 
-    transition:.3s;
-}
+    z-index:1000;
 
-#topBtn:hover{
-    transform:translateY(-5px);
+    transition:.3s;
 
     box-shadow:
-    0 0 20px rgba(255,212,0,.5);
+        0 5px 20px rgba(0,0,0,.4);
 }
 
-/* ==========================
-   TABLET
-========================== */
 
-@media(max-width:1024px){
+#topBtn:hover{
 
-    .hero h1{
-        font-size:4rem;
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 0 20px rgba(255,212,0,.5);
+}
+
+
+/* =========================================================
+   MENSAGEM DE ERRO DO VÍDEO
+   ========================================================= */
+
+.video-erro{
+
+    width:100%;
+
+    max-width:560px;
+
+    margin:25px auto 0;
+
+    padding:
+        25px 20px;
+
+    box-sizing:border-box;
+
+    border:
+        2px solid rgba(225,6,0,.5);
+
+    border-radius:20px;
+
+    background:#111;
+
+    text-align:center;
+
+    color:#fff;
+}
+
+
+.video-erro strong{
+
+    display:block;
+
+    color:#ffd400;
+
+    font-size:1.1rem;
+
+    margin-bottom:10px;
+}
+
+
+.video-erro span{
+
+    display:block;
+
+    color:#ccc;
+
+    margin-bottom:10px;
+}
+
+
+.video-erro code{
+
+    display:block;
+
+    color:#00bfff;
+
+    word-break:break-all;
+
+    font-size:.85rem;
+}
+
+
+/* =========================================================
+   TABLETS
+   ========================================================= */
+
+@media (max-width:1024px){
+
+    nav{
+
+        gap:8px 15px;
     }
 
-    .titulo,
-    .intro h2,
-    .galeria h2{
-        font-size:3rem;
+
+    nav a{
+
+        font-size:.8rem;
     }
+
 
     .viagem,
     .reverse{
+
         flex-direction:column;
+
+        align-items:stretch;
     }
 
-    .viagem{
-        gap:30px;
-    }
 
-    .viagem img{
+    .viagem > img{
+
+        flex:none;
+
         width:100%;
+
         max-width:700px;
+
+        margin:auto;
     }
+
+
+    .texto{
+
+        width:100%;
+    }
+
+
+    .video-missionario{
+
+        max-width:650px;
+
+        margin-left:auto;
+
+        margin-right:auto;
+    }
+
 
     .estatisticas{
-        grid-template-columns:repeat(2,1fr);
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES
+   ========================================================= */
+
+@media (max-width:768px){
+
+    html{
+
+        scroll-padding-top:120px;
+    }
+
+
+    /* HERO */
+
+    .hero{
+
+        min-height:600px;
+
+        padding:
+            80px 15px;
+    }
+
+
+    .hero-content{
+
+        padding:10px;
+    }
+
+
+    .subtitle{
+
+        margin-bottom:15px;
+
+        letter-spacing:2px;
+    }
+
+
+    .hero h1{
+
+        font-size:
+            clamp(2.2rem, 12vw, 3.5rem);
+
+        line-height:1.05;
+
+        margin-bottom:20px;
+    }
+
+
+    .hero p{
+
+        font-size:.95rem;
+
+        line-height:1.7;
+    }
+
+
+    .btn{
+
+        margin-top:25px;
+
+        padding:
+            14px 25px;
+
+        font-size:.8rem;
+    }
+
+
+    /* MENU */
+
+    nav{
+
+        position:sticky;
+
+        padding:
+            10px 8px;
+
+        gap:6px;
+
+        justify-content:center;
+    }
+
+
+    nav a{
+
+        font-size:.68rem;
+
+        padding:
+            5px 6px;
+
+        letter-spacing:0;
+
+        white-space:normal;
+
+        text-align:center;
+    }
+
+
+    /* INTRO */
+
+    .intro{
+
+        padding:
+            65px 18px;
+    }
+
+
+    .intro p{
+
+        font-size:.95rem;
+
+        line-height:1.8;
+    }
+
+
+    /* VIAGENS */
+
+    #viagens{
+
+        padding:
+            55px 12px;
+    }
+
+
+    .viagem{
+
+        padding:18px;
+
+        gap:25px;
+
+        margin-bottom:50px;
+
+        border-radius:18px;
+    }
+
+
+    .viagem > img{
+
+        width:100%;
+
+        aspect-ratio:16 / 10;
+
+        border-radius:15px;
+
+        border-width:2px;
+    }
+
+
+    .texto h3{
+
+        font-size:
+            clamp(1.4rem, 7vw, 1.8rem);
+
+        margin-bottom:15px;
+    }
+
+
+    .texto p{
+
+        font-size:.9rem;
+
+        line-height:1.8;
+    }
+
+
+    /* VÍDEO */
+
+    .video-missionario{
+
+        width:100%;
+
+        max-width:100%;
+
+        aspect-ratio:16 / 9;
+
+        margin-top:20px;
+
+        border-radius:12px;
+
+        border-width:1px;
+    }
+
+
+    /* CARROSSEL */
+
+    .carousel{
+
+        margin-top:20px;
+
+        border-radius:12px;
+    }
+
+
+    .carousel-track{
+
+        gap:10px;
+
+        animation-duration:65s;
+    }
+
+
+    .carousel-track img{
+
+        width:190px;
+
+        height:125px;
+
+        border-radius:12px;
+
+        border-width:1px;
+    }
+
+
+    /* ESTATÍSTICAS */
+
+    .estatisticas{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:10px;
+
+        padding:
+            60px 12px;
+    }
+
+
+    .numero{
+
+        padding:15px 5px;
+    }
+
+
+    .numero h3{
+
+        font-size:2.5rem;
+    }
+
+
+    .numero p{
+
+        font-size:.78rem;
+
+        line-height:1.4;
+    }
+
+
+    /* GALERIA */
+
+    .galeria{
+
+        padding:
+            70px 15px;
+    }
+
+
+    .grid{
+
+        grid-template-columns:1fr;
+
+        gap:15px;
+    }
+
+
+    .grid img{
+
+        height:auto;
+
+        aspect-ratio:16 / 10;
+
+        border-radius:15px;
+
+        border-width:1px;
+    }
+
+
+    /* VERSÍCULO */
+
+    .versiculo{
+
+        padding:
+            70px 15px;
+    }
+
+
+    blockquote{
+
+        padding:
+            30px 20px;
+
+        border-left-width:3px;
+
+        border-radius:15px;
+
+        font-size:1.15rem;
+
+        line-height:1.7;
+    }
+
+
+    blockquote span{
+
+        font-size:.8rem;
+    }
+
+
+    /* FOOTER */
+
+    footer{
+
+        padding:
+            60px 15px;
+    }
+
+
+    footer p{
+
+        font-size:.8rem;
+
+        line-height:1.6;
+    }
+
+
+    /* BOTÃO TOPO */
+
+    #topBtn{
+
+        width:48px;
+
+        height:48px;
+
+        right:15px;
+
+        bottom:15px;
+
+        font-size:18px;
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width:480px){
+
+    .hero{
+
+        min-height:550px;
+
+        padding:
+            70px 12px;
+    }
+
+
+    .hero h1{
+
+        font-size:
+            clamp(2rem, 13vw, 2.8rem);
+    }
+
+
+    .hero p{
+
+        font-size:.9rem;
+    }
+
+
+    nav{
+
+        gap:4px;
+
+        padding:8px 5px;
+    }
+
+
+    nav a{
+
+        font-size:.62rem;
+
+        padding:
+            4px 5px;
+    }
+
+
+    .titulo,
+    .intro h2,
+    .galeria h2{
+
+        font-size:1.9rem;
+
+        margin-bottom:30px;
+    }
+
+
+    #viagens{
+
+        padding-left:10px;
+
+        padding-right:10px;
+    }
+
+
+    .viagem{
+
+        padding:14px;
+
         gap:20px;
     }
 
-}
 
-/* ==========================
-   CELULAR
-========================== */
+    .viagem > img{
 
-@media(max-width:768px){
+        aspect-ratio:16 / 10;
 
-    .hero{
-        padding:100px 20px;
+        border-radius:12px;
     }
 
-    .subtitle{
-        letter-spacing:3px;
+
+    .texto h3{
+
+        font-size:1.4rem;
+    }
+
+
+    .texto p{
+
         font-size:.85rem;
     }
 
-    .hero h1{
-        font-size:3rem;
-        line-height:1.1;
+
+    .video-missionario{
+
+        width:100%;
+
+        aspect-ratio:16 / 9;
+
+        border-radius:10px;
     }
 
-    .hero p{
-        font-size:1rem;
-        line-height:1.8;
-    }
-
-    .btn{
-        padding:15px 30px;
-        font-size:.9rem;
-    }
-
-    .titulo,
-    .intro h2,
-    .galeria h2{
-        font-size:2.3rem;
-    }
-
-    .intro{
-        padding:80px 20px;
-    }
-
-    #viagens{
-        padding:60px 15px;
-    }
-
-    .viagem{
-        padding:20px;
-        margin-bottom:60px;
-    }
-
-    .texto h3{
-        font-size:1.8rem;
-    }
-
-    .texto p{
-        font-size:.95rem;
-    }
 
     .carousel-track img{
-        width:220px;
-        height:140px;
+
+        width:165px;
+
+        height:110px;
+
+        border-radius:10px;
     }
 
+
     .estatisticas{
+
         grid-template-columns:1fr 1fr;
-        padding:70px 20px;
+
+        padding:
+            50px 8px;
     }
+
 
     .numero h3{
-        font-size:2.8rem;
-    }
 
-    .galeria{
-        padding:80px 15px;
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .grid img{
-        height:240px;
-    }
-
-    blockquote{
-        font-size:1.4rem;
-        padding:30px 20px;
-        line-height:1.8;
-    }
-
-}
-
-@media(max-width:480px){
-
-    .hero h1{
-        font-size:2.2rem;
-    }
-
-    .hero p{
-        font-size:.95rem;
-    }
-
-    .titulo,
-    .intro h2,
-    .galeria h2{
-        font-size:1.9rem;
-    }
-
-    .texto h3{
-        font-size:1.5rem;
-    }
-
-    .carousel-track img{
-        width:180px;
-        height:120px;
-    }
-
-    .estatisticas{
-        grid-template-columns:1fr;
-    }
-
-    .numero h3{
         font-size:2rem;
     }
 
-    blockquote{
-        font-size:1.1rem;
-        padding:25px 15px;
+
+    .numero p{
+
+        font-size:.7rem;
     }
+
+
+    .galeria{
+
+        padding:
+            60px 10px;
+    }
+
+
+    .grid{
+
+        gap:12px;
+    }
+
+
+    .grid img{
+
+        aspect-ratio:4 / 3;
+
+        border-radius:12px;
+    }
+
+
+    blockquote{
+
+        padding:
+            25px 15px;
+
+        font-size:1rem;
+    }
+
+
+    footer{
+
+        padding:
+            50px 15px;
+    }
+
 
     footer h3{
-        font-size:1.5rem;
+
+        font-size:1.4rem;
     }
+
 
     footer p{
-        font-size:.9rem;
-    }
 
-    #topBtn{
-        width:50px;
-        height:50px;
-        font-size:18px;
-        right:15px;
-        bottom:15px;
+        font-size:.75rem;
     }
 
 }
+
+
+/* =========================================================
+   TELAS MUITO PEQUENAS
+   ========================================================= */
+
+@media (max-width:360px){
+
+    .hero h1{
+
+        font-size:2rem;
+    }
+
+
+    nav a{
+
+        font-size:.58rem;
+
+        padding:
+            3px 4px;
+    }
+
+
+    .viagem{
+
+        padding:12px;
+    }
+
+
+    .texto h3{
+
+        font-size:1.3rem;
+    }
+
+
+    .carousel-track img{
+
+        width:145px;
+
+        height:95px;
+    }
+
+
+    .numero h3{
+
+        font-size:1.8rem;
+    }
+
+}
+
+
+/* =========================================================
+   TELAS GRANDES
+   ========================================================= */
+
+@media (min-width:1600px){
+
+    .viagem{
+
+        max-width:1400px;
+
+        margin-left:auto;
+
+        margin-right:auto;
+    }
+
+
+    .grid{
+
+        max-width:1400px;
+
+        margin:auto;
+    }
+
+}
+
+
+/* =========================================================
+   REDUZIR ANIMAÇÕES PARA QUEM PREFERIR
+   ========================================================= */
+
+@media (prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        scroll-behavior:auto !important;
+
+        animation-duration:.01ms !important;
+
+        animation-iteration-count:1 !important;
+
+        transition-duration:.01ms !important;
+    }
+
+}
+
