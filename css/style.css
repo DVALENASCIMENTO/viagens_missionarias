@@ -555,10 +555,7 @@ nav a:hover{
 
     height:auto;
 
-    margin:
-        25px auto 0;
-
-    object-fit:contain;
+    margin:25px auto 0;
 
     background:#000;
 
@@ -569,12 +566,27 @@ nav a:hover{
 
     box-shadow:
         0 10px 30px rgba(0,0,0,.45);
+
+    overflow:hidden;
 }
 
+
+.video-missionario iframe{
+
+    display:block;
+
+    width:100%;
+
+    height:100%;
+
+    border:0;
+
+}
 
 
 /* =========================================================
    CARROSSEL DE FOTOS
+   O movimento é controlado pelo JavaScript
    ========================================================= */
 
 .carousel {
@@ -588,19 +600,27 @@ nav a:hover{
 
 .carousel-track {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     gap: 15px;
 
     width: max-content;
 
-    /* IMPORTANTE:
-       o movimento agora será feito pelo JavaScript */
-    transform: translateX(0);
+    /*
+       IMPORTANTE:
+       não utilizar animation aqui.
+       O JavaScript controla o movimento.
+    */
+    animation: none !important;
+
+    transform: translate3d(0, 0, 0);
 
     will-change: transform;
 }
 
 .carousel-track img {
+    display: block;
+
     flex: 0 0 auto;
 
     width: 280px;
@@ -610,17 +630,19 @@ nav a:hover{
 
     border-radius: 15px;
 
-    border: 2px solid rgba(255,212,0,.15);
+    border: 2px solid rgba(255, 212, 0, .15);
 
-    cursor: pointer;
+    user-select: none;
+
+    -webkit-user-drag: none;
 
     transition:
-        transform .3s ease,
-        border-color .3s ease;
+        transform .25s ease,
+        border-color .25s ease;
 }
 
 .carousel-track img:hover {
-    transform: scale(1.04);
+    transform: scale(1.03);
     border-color: var(--amarelo);
 }
 
@@ -688,7 +710,7 @@ nav a:hover{
 
 
 /* =========================================================
-   CELULAR MUITO PEQUENO
+   TELAS MUITO PEQUENAS
    ========================================================= */
 
 @media (max-width:360px) {

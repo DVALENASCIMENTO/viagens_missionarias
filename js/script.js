@@ -7,54 +7,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const topBtn = document.getElementById('topBtn');
 
     if (topBtn) {
+
         window.addEventListener('scroll', () => {
-            topBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+
+            topBtn.style.display =
+                window.scrollY > 300 ? 'block' : 'none';
+
         });
 
         topBtn.addEventListener('click', () => {
+
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
+
         });
+
     }
 
+
     /* ==========================================
-       VERIFICAÇÃO DOS VÍDEOS
+       VÍDEOS YOUTUBE
     ========================================== */
 
-    const videos = document.querySelectorAll('.video-missionario');
+    /*
+     * .video-missionario é o contêiner dos vídeos.
+     * O conteúdo real é o iframe do YouTube.
+     *
+     * Não usamos video.load(), pois isso causaria
+     * erro quando .video-missionario for uma <div>.
+     */
 
-    videos.forEach((video) => {
+    const videos = document.querySelectorAll(
+        '.video-missionario iframe'
+    );
 
-        video.addEventListener('error', () => {
+    videos.forEach((iframe) => {
 
-            if (video.dataset.erro === 'true') return;
-
-            video.dataset.erro = 'true';
-
-            const source = video.querySelector('source');
-            const caminho = source ? source.getAttribute('src') : '';
-
-            const aviso = document.createElement('div');
-
-            aviso.className = 'video-erro';
-
-            aviso.innerHTML = `
-                <strong>Vídeo não encontrado</strong>
-                <span>Verifique se o arquivo existe na pasta:</span>
-                <code>${caminho}</code>
-            `;
-
-            video.style.display = 'none';
-            video.parentNode.insertBefore(aviso, video);
-
-        });
-
-        /* Força o navegador a carregar o vídeo */
-        video.load();
+        iframe.setAttribute('loading', 'lazy');
 
     });
+
 
     /* ==========================================
        MODAL / AMPLIAÇÃO DAS IMAGENS
@@ -84,10 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.zIndex = '9999';
             modal.style.cursor = 'zoom-out';
 
-            const imagemAmpliada = document.createElement('img');
+            const imagemAmpliada =
+                document.createElement('img');
 
             imagemAmpliada.src = img.src;
-            imagemAmpliada.alt = img.alt || 'Imagem ampliada';
+
+            imagemAmpliada.alt =
+                img.alt || 'Imagem ampliada';
 
             imagemAmpliada.style.maxWidth = '95%';
             imagemAmpliada.style.maxHeight = '95%';
@@ -99,20 +96,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
             modal.appendChild(imagemAmpliada);
 
+
+            /* Fechar clicando fora da imagem */
+
             modal.addEventListener('click', (event) => {
+
                 if (event.target === modal) {
+
                     modal.remove();
+
                 }
+
             });
 
-            imagemAmpliada.addEventListener('click', (event) => {
-                event.stopPropagation();
-            });
+
+            /* Impede que o clique na imagem feche o modal */
+
+            imagemAmpliada.addEventListener(
+                'click',
+                (event) => {
+
+                    event.stopPropagation();
+
+                }
+            );
+
 
             document.body.appendChild(modal);
+
         });
 
     });
+
 
     /* ==========================================
        FECHAR MODAL COM ESC
@@ -127,7 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
             if (modal) {
+
                 modal.remove();
+
             }
 
         }
@@ -135,231 +152,368 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-/* ==========================================
-   CARROSSEL AUTOMÁTICO DE FOTOS
-   VERSÃO DEFINITIVA
-========================================== */
-
-const carrosseis = document.querySelectorAll('.carousel');
-
-carrosseis.forEach((carousel) => {
-
-    const track = carousel.querySelector('.carousel-track');
-
-    if (!track) return;
-
-
     /* ==========================================
-       DESATIVA QUALQUER ANIMAÇÃO CSS ANTIGA
+       CARROSSEL AUTOMÁTICO DE FOTOS
+       LOOP INFINITO
     ========================================== */
 
-    track.style.animation = 'none';
+    const carrosseis =
+        document.querySelectorAll('.carousel');
 
+    carrosseis.forEach((carousel) => {
 
-    /* ==========================================
-       VARIÁVEIS
-    ========================================== */
+        const track =
+            carousel.querySelector('.carousel-track');
 
-    let posicao = 0;
-
-    let velocidade = 0.6;
-
-    let pausado = false;
-
-    let larguraOriginal = 0;
-
-    let ultimoTempo = performance.now();
-
-
-    /* ==========================================
-       DESCOBRIR O TAMANHO DO PRIMEIRO GRUPO
-    ========================================== */
-
-    function calcularLargura() {
-
-        const imagens = track.querySelectorAll('img');
-
-        if (imagens.length < 2) {
-            larguraOriginal = track.scrollWidth;
+        if (!track) {
             return;
         }
 
 
-        /*
-         * O HTML possui as fotos repetidas.
-         *
-         * Metade do conteúdo corresponde ao
-         * primeiro conjunto.
-         */
+        /* ==========================================
+           VARIÁVEIS
+        ========================================== */
 
-        larguraOriginal = track.scrollWidth / 2;
+        let posicao = 0;
 
-    }
+        const velocidade = 0.6;
 
+        let pausado = false;
 
-    /* ==========================================
-       MOVIMENTO CONTÍNUO
-    ========================================== */
+        let larguraOriginal = 0;
 
-    function animar(tempoAtual) {
-
-        const delta =
-            tempoAtual - ultimoTempo;
-
-        ultimoTempo = tempoAtual;
+        let ultimoTempo = performance.now();
 
 
-        if (!pausado && larguraOriginal > 0) {
+        /* ==========================================
+           CALCULAR LARGURA DO PRIMEIRO CONJUNTO
+        ========================================== */
 
-            /*
-             * Movimento independente da taxa
-             * de atualização do monitor.
-             */
+        function calcularLargura() {
 
-            posicao -=
-                velocidade * (delta / 16.67);
+            const imagens =
+                track.querySelectorAll('img');
 
+            if (imagens.length < 2) {
 
-            /*
-             * Quando terminar o primeiro grupo,
-             * volta ao início.
-             */
+                larguraOriginal = 0;
 
-            if (
-                Math.abs(posicao) >= larguraOriginal
-            ) {
-
-                posicao = 0;
+                return;
 
             }
 
 
-            track.style.transform =
-                `translate3d(${posicao}px, 0, 0)`;
+            /*
+             * As imagens precisam estar duplicadas
+             * no HTML para que o loop seja contínuo.
+             *
+             * Em vez de usar scrollWidth / 2,
+             * calculamos exatamente a largura do
+             * primeiro conjunto de imagens.
+             */
+
+            const quantidade =
+                imagens.length / 2;
+
+
+            /*
+             * Verifica se a quantidade de imagens
+             * é realmente par.
+             */
+
+            if (!Number.isInteger(quantidade)) {
+
+                larguraOriginal = 0;
+
+                console.warn(
+                    'Carrossel: as imagens não estão duplicadas corretamente.'
+                );
+
+                return;
+
+            }
+
+
+            let largura = 0;
+
+
+            for (let i = 0; i < quantidade; i++) {
+
+                largura += imagens[i].offsetWidth;
+
+            }
+
+
+            /*
+             * Obtém o espaço entre as imagens.
+             */
+
+            const estilo =
+                window.getComputedStyle(track);
+
+            const gap =
+                parseFloat(
+                    estilo.columnGap ||
+                    estilo.gap
+                ) || 0;
+
+
+            /*
+             * Soma os espaços entre as imagens
+             * do primeiro conjunto.
+             */
+
+            if (quantidade > 1) {
+
+                largura +=
+                    gap * (quantidade - 1);
+
+            }
+
+
+            larguraOriginal = largura;
+
+
+            /*
+             * Segurança.
+             */
+
+            if (larguraOriginal <= 0) {
+
+                larguraOriginal = 0;
+
+            }
 
         }
 
 
-        requestAnimationFrame(animar);
+        /* ==========================================
+           ANIMAÇÃO
+        ========================================== */
 
-    }
+        function animar(tempoAtual) {
 
+            const delta =
+                tempoAtual - ultimoTempo;
 
-    /* ==========================================
-       PAUSAR COM MOUSE
-    ========================================== */
-
-    carousel.addEventListener(
-        'mouseenter',
-        () => {
-
-            pausado = true;
-
-        }
-    );
+            ultimoTempo = tempoAtual;
 
 
-    carousel.addEventListener(
-        'mouseleave',
-        () => {
+            if (
+                !pausado &&
+                larguraOriginal > 0
+            ) {
 
-            pausado = false;
-
-        }
-    );
-
-
-    /* ==========================================
-       CELULAR
-    ========================================== */
-
-    carousel.addEventListener(
-        'touchstart',
-        () => {
-
-            pausado = true;
-
-        },
-        {
-            passive:true
-        }
-    );
+                posicao -=
+                    velocidade *
+                    (delta / 16.67);
 
 
-    carousel.addEventListener(
-        'touchend',
-        () => {
+                /*
+                 * Quando chega ao final do primeiro
+                 * conjunto, retorna exatamente a largura
+                 * equivalente.
+                 */
 
-            setTimeout(() => {
+                if (
+                    Math.abs(posicao) >=
+                    larguraOriginal
+                ) {
 
-                pausado = false;
+                    posicao +=
+                        larguraOriginal;
 
-            }, 800);
-
-        },
-        {
-            passive:true
-        }
-    );
-
-
-    /* ==========================================
-       REAJUSTAR AO REDIMENSIONAR
-    ========================================== */
-
-    window.addEventListener(
-        'resize',
-        () => {
-
-            calcularLargura();
-
-        }
-    );
+                }
 
 
-    /* ==========================================
-       ESPERAR AS IMAGENS
-    ========================================== */
+                track.style.transform =
+                    `translate3d(${posicao}px, 0, 0)`;
 
-    function iniciar() {
+            }
 
-        calcularLargura();
-
-        /*
-         * Pequeno atraso para garantir que
-         * todas as dimensões das imagens
-         * estejam disponíveis.
-         */
-
-        setTimeout(() => {
-
-            calcularLargura();
 
             requestAnimationFrame(animar);
 
-        }, 300);
-
-    }
+        }
 
 
-    if (document.readyState === 'complete') {
+        /* ==========================================
+           PAUSAR COM MOUSE
+        ========================================== */
 
-        iniciar();
+        carousel.addEventListener(
+            'mouseenter',
+            () => {
 
-    } else {
+                pausado = true;
 
-        window.addEventListener(
-            'load',
-            iniciar,
-            {
-                once:true
             }
         );
 
-    }
 
-});
+        carousel.addEventListener(
+            'mouseleave',
+            () => {
+
+                pausado = false;
+
+                ultimoTempo =
+                    performance.now();
+
+            }
+        );
 
 
+        /* ==========================================
+           CONTROLE NO CELULAR
+        ========================================== */
+
+        carousel.addEventListener(
+            'touchstart',
+            () => {
+
+                pausado = true;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        carousel.addEventListener(
+            'touchend',
+            () => {
+
+                setTimeout(() => {
+
+                    pausado = false;
+
+                    ultimoTempo =
+                        performance.now();
+
+                }, 800);
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        /* ==========================================
+           REDIMENSIONAMENTO DA TELA
+        ========================================== */
+
+        window.addEventListener(
+            'resize',
+            () => {
+
+                calcularLargura();
+
+            }
+        );
+
+
+        /* ==========================================
+           INICIAR CARROSSEL
+        ========================================== */
+
+        function iniciarCarrossel() {
+
+            calcularLargura();
+
+            posicao = 0;
+
+            ultimoTempo =
+                performance.now();
+
+            requestAnimationFrame(animar);
+
+        }
+
+
+        /* ==========================================
+           AGUARDAR AS IMAGENS
+        ========================================== */
+
+        const imagens =
+            track.querySelectorAll('img');
+
+
+        if (imagens.length === 0) {
+
+            console.warn(
+                'Carrossel: nenhuma imagem encontrada.'
+            );
+
+            return;
+
+        }
+
+
+        let carregadas = 0;
+
+
+        function imagemCarregada() {
+
+            carregadas++;
+
+
+            if (
+                carregadas ===
+                imagens.length
+            ) {
+
+                iniciarCarrossel();
+
+            }
+
+        }
+
+
+        imagens.forEach((img) => {
+
+            /*
+             * Imagem já carregada.
+             */
+
+            if (img.complete) {
+
+                imagemCarregada();
+
+            } else {
+
+                /*
+                 * Imagem carregada normalmente.
+                 */
+
+                img.addEventListener(
+                    'load',
+                    imagemCarregada,
+                    {
+                        once: true
+                    }
+                );
+
+
+                /*
+                 * Mesmo se uma imagem apresentar erro,
+                 * não impede o carrossel de iniciar.
+                 */
+
+                img.addEventListener(
+                    'error',
+                    imagemCarregada,
+                    {
+                        once: true
+                    }
+                );
+
+            }
+
+        });
+
+    });
 
 });
